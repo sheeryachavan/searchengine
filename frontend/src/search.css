@@ -1,0 +1,320 @@
+.clssearch-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2f3640;
+    border-radius: 40px;
+    padding: 10px;
+    display: flex;
+    box-shadow: 0px 0px 50px 20px #ffffff;
+
+}
+
+.clssearch-boxrp {
+    background: #2f3640;
+    border-radius: 40px;
+    padding: 10px;
+    display: inline-flex;
+    margin: 3rem 10rem;
+    box-shadow: 0px 0px 50px 20px #ffffff;
+}
+
+.clssearch-boxrp:hover {
+    width: 50rem;
+}
+
+
+.clssearch-container {
+    flex: 100%;
+    position: inherit;
+    min-height: 100vh;
+    background: url("./images/EIMG_8610.jpg"), linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 99%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: soft-light;
+    background-position-y: bottom;
+
+}
+
+.clssearch-btn {
+    color: #e84118;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+
+}
+
+.clssearch-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0px;
+    color: white;
+    font-size: 1rem;
+
+    transition: 0.4s;
+    line-height: 40px;
+
+
+}
+
+.clssearch-box:hover {
+    box-shadow: 0px 0px 70px 30px #ffffff;
+}
+
+.clssearch-box:hover>.clssearch-txt {
+    width: 50rem;
+    padding: 0px 6px;
+    transition: 0.4s;
+    display: inline;
+
+}
+
+.clssearch-box:hover>.clssearch-btn {
+    background: white;
+
+}
+
+.clssearch-box:hover>.clssearch-container {
+    /* opacity: 0.5; */
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: blur(9px);
+}
+
+.clssearch-boxrp:hover>.clssearch-txt {
+    width: 100%;
+    padding: 0px 6px;
+    transition: 0.4s;
+    display: inline;
+
+}
+
+.clssearch-boxrp:hover>.clssearch-btn {
+    background: white;
+
+}
+
+.clssearch-boxrp:hover>.clssearch-container {
+    /* opacity: 0.5; */
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: blur(9px);
+}
+
+.hometitle {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    align-items: center;
+    left: 10%;
+    top: 20%;
+    font-size: 15rem;
+    font-family: "Candara";
+    font-weight: bolder;
+    text-shadow: 0px 9rem 22px #ffffff6b, 0px 0px 50px #000000;
+
+
+}
+
+.clsSuggestionContainer {
+    position: relative;
+    margin-top: 4rem !important;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+.clsSuggestionItem {
+    color: #ffffff;
+
+}
+
+.clsSuggestionItem-active {
+    background: #414c5a;
+    color: #ffffff;
+    line-height: 2rem;
+    font-size: 1.2rem;
+}
+
+.clsToggleSwitch {}
+
+.clsToggleSwitchContainer {
+    /* padding: 4% 42.5%; */
+    display: inline-flex;
+}
+
+.clsToggleLabels {
+    color: white;
+    text-shadow: 0px 0px 5px white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.6rem;
+}
+
+.clsToggleSwitchContainerInner {
+    display: inline-flex;
+}
+
+.clssearch-boxClose {
+    background: transparent;
+    color: white;
+    border: none;
+    -webkit-highlight: none;
+}
+
+.clssearch-header {
+    color: white;
+    font-family: cursive;
+    font-size: 10em;
+    margin: 0;
+    text-shadow: 0px 5px 15px #510303;
+    padding-top: 10rem;
+    position: relative;
+}
+
+.clslistlink {
+    font-size: 3rem;
+    text-align: left;
+    padding: 0.3rem 3rem;
+    display: block;
+}
+
+.clsmainlink {
+    font-size: 1.5rem;
+    text-align: left;
+    padding: 0.3rem 3rem;
+}
+
+.clsdesc {
+    font-size: 1.em;
+    text-align: left;
+    padding: 0.3rem 3rem;
+}
+
+
+
+
+.figure {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 20rem;
+    height: 20rem;
+    padding: 20px 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    color:white;
+}
+
+.figure:before,
+.figure:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.figure:before {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.figure:after {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
+
+.figure:hover {
+    background-size: 175%;
+}
+
+.figure:hover:after {
+    content: '♣︎';
+    background-color: rgba(241, 196, 15, 0.9);
+    color: white;
+    font-size: 72px;
+    z-index: 2;
+}
+
+.figure:hover .date {
+    bottom: -59px;
+}
+
+.figure:hover figcaption {
+    transform: translateY(-110%);
+}
+
+.figure .date {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    background-color: rgba(241, 196, 15, 0.8);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.figure .date span {
+    color: white;
+    line-height: 1;
+}
+
+.figure .date span:first-child {
+    font-family: Candara,"Source Code Pro", sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.figure .date span:last-child {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.figure figcaption {
+    display: block;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+}
+
+.figure figcaption h4 {
+    margin: 0 0 5px;
+    font-family: Candara,"Source Code Pro", sans-serif;
+    font-size: 24px;
+    line-height: 1.35;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.figure figcaption h4>span {
+    background-color: rgba(241, 196, 15, 0.8);
+}
+
+.figure figcaption p {
+    margin: 0;
+    line-height: 1.5;
+}
+.carddisplay{
+    display: inline-flex;
+}
