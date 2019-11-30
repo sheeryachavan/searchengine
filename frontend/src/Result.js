@@ -6,68 +6,7 @@ class Result extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Chicken-Farcha-84589.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                },
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Khatti-Mooli-2948.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                },
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Chicken-Farcha-84589.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                },
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Khatti-Mooli-2948.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                },
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Chicken-Farcha-84589.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                },
-                {
-                    "_id": "5ddc406b1ced558962a44904",
-                    "image": "http://fd2static.foodfood.com.s3.ap-south-1.amazonaws.com/images/Chicken-Farcha-84589.jpg",
-                    "title": "Chicken Farcha",
-                    "Prep": " 2 hours",
-                    "Cook": " 30 minutes",
-                    "key_ing": ["Chicken drumsticks", "Eggs", "Breadcrumbs"],
-                    "desc": "A popular Parsi deep-fried chicken drumsticks ",
-                    "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
-                }
-            ]
+            list: []
         };
         this.handleQueryChange = this.handleQueryChange.bind(this);
     }
@@ -94,7 +33,7 @@ class Result extends Component {
                     this.setState({ ...this.state, list: data })
                 );
             }
-
+            var a = 0;
         }
         catch (e) {
             console.log(e)
@@ -150,7 +89,7 @@ class Result extends Component {
                         className='clssearch-txt' value={this.state.query} onChange={this.handleQueryChange}
                         onKeyPress={(event) => {
                             if (event.key === 'Enter' || event.key === 'Return') {
-                                var link = document.getElementById('resulttest');
+                                var link = document.getElementById('resulttest1');
                                 link.click();
                             }
                         }}
@@ -166,7 +105,7 @@ class Result extends Component {
                     pathname: "/results", query: {
                         query: this.state.query
                     }
-                }} style={{ hidden: true }} id="resulttest">
+                }} style={{ hidden: true }} id="resulttest1">
                 </Link>
             </div >
 

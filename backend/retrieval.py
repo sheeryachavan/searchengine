@@ -1,7 +1,6 @@
 from textblob import Word
-
-def dataRetrieval():
-    ingredients_str = "tomato carrot salt pepper cabbage"
+def dataRetrieval(query):
+    ingredients_str = query
     ingredients_str = ingredients_str.split()
     stop_words = set(["salt","pepper"]) 
 
@@ -36,7 +35,6 @@ def dataRetrieval():
     #         print(ranked_results)
     #         print("======================================================================================")
             
-    print(ranked_results)
-    print(final_result)
-    # return ranked_results,final_result
+   
+    return ranked_results,final_result
 
