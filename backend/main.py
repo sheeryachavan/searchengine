@@ -1,6 +1,6 @@
 from __future__ import absolute_import, print_function
 import flask
-app = flask.Flask("__main__", static_folder="../findit/build/static", template_folder="../findit/build")
+app = flask.Flask("__main__", static_folder="../frontend/build/static", template_folder="../frontend/build")
 from flask import Flask, request
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 from flask import json, g
