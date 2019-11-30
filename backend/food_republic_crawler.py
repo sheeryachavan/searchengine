@@ -19,7 +19,7 @@ import requests
 requests.adapters.DEFAULT_RETRIES = 1
 from textblob import TextBlob
 from textblob import Word
-
+from config import MongoConnection
 
 # In[18]:
 
@@ -56,6 +56,8 @@ def filter_ing(ing):
 
 
 def scrap_link(link):
+    client = MongoConnection()
+    db = client.foodrepublic
     req = requests.get(link)
     soup = BeautifulSoup(req.text, 'lxml')
 
@@ -75,15 +77,16 @@ def scrap_link(link):
     for i in soup.find_all('li', {'class': 'cook-time'}):
         #print(i.text)
         rec_det["Cook"] = i.text.split(":")[1].strip()
-    rec_det["Ingredients"] = []
+    rec_det["key_ing"] = []
     for ing in soup.find_all('span', {'class': 'ingredient-label'}):
     #     print(ing.text)     # All Ingredients
-        rec_det["Ingredients"].append(filter_ing(ing.text.strip()))
+        rec_det["key_ing"].append(filter_ing(ing.text.strip()))
     allp = []
     for desc in soup.find_all('p'):
         #print(method.text)
         allp.append(desc.text)
     rec_det["desc"] = allp[1].split(".")[0]
+    db.fr_recipes.insert_one(rec_det)
     print(rec_det)
 
 
@@ -137,12 +140,13 @@ while True:
         u = link.get('href')
         if not is_absolute(u):
             u =  urljoin(url,u)
-        if "foodrepublic.com/recipes" in u and "@foodrepublic.com" not in u:
+        if "foodrepublic.com" in u and "@foodrepublic.com" not in u:
             url_string = urldefrag(u)[0]
             if url_string not in urlsAlreadyVisited:
                 if agent.allowed(u):
                     q.put(u)
-                    scrap_link(u)
+                    if "foodrepublic.com/recipes" in url_string:	
+                        scrap_link(u)
                     urlsAlreadyVisited.add(u)
     if q.empty():
         break
@@ -151,11 +155,6 @@ while True:
 
 
 # In[ ]:
-
-
-with open("urlsVisited.txt","w+", encoding='utf-8') as urlsVisited:
-        for url in urlsAlreadyVisited:
-            urlsVisited.write(url+"\n")
 
 
 # In[ ]:
