@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/findit/node_modules
+/findit/.pnp
+/findit/.pnp.js
+
+# testing
+/findit/coverage
+
+# production
+/findit/build
+
+# misc
+/findit/.DS_Store
+/findit/.env.local
+/findit/.env.development.local
+/findit/.env.test.local
+/findit/.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
