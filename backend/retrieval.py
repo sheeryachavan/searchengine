@@ -1,4 +1,5 @@
 from textblob import Word
+
 def dataRetrieval(query):
     ingredients_str = query
     ingredients_str = ingredients_str.split()
@@ -12,7 +13,7 @@ def dataRetrieval(query):
     ranked_results = {}
     final_result = []
     result = []
-
+    inverted_index = db.invertedindex[0]
     for (count, input_ingred) in enumerate(ingredients):
 #     print(count)
         ingred_combine_list = []

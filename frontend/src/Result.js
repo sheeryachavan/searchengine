@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import APIClient from './apiClient'
 import './search.css';
+import ovenLoad from './images/oven.gif';
 class Result extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: []
+            list: [],
+            loading: false,
+            query: ""
         };
         this.handleQueryChange = this.handleQueryChange.bind(this);
     }
@@ -14,7 +17,6 @@ class Result extends Component {
     //     this.getResults()
     // }
     handleQueryChange = query => {
-        debugger;
         this.setState({
             query: query.target.value
         });
@@ -27,26 +29,61 @@ class Result extends Component {
 
     async componentDidMount() {
         try {
+
             this.apiClient = new APIClient();
             if (this.props.location && this.props.location.query.query) {
+                this.setState({ loading: true })
                 this.apiClient.getResults(this.props.location.query.query).then((data) =>
-                    this.setState({ ...this.state, list: data })
+                    this.setState({ ...this.state, list: data, loading: false, query: this.props.location.query.query })
                 );
             }
-            var a = 0;
+            else{
+                var link = document.getElementById('resulttest1');
+                link.click();
+            }
+
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            this.setState({ loading: true });
         }
 
     }
+    async reloadResults() {
+        try {
 
+            this.apiClient = new APIClient();
+            if (this.state.query) {
+                this.setState({ loading: true })
+                this.apiClient.getResults(this.state.query).then((data) =>
+                    this.setState({ ...this.state, list: data, loading: false, query: this.state.query })
+                );
+            }
+            else {
+                var link = document.getElementById('resulttest1');
+                link.click();
+            }
+
+        }
+        catch (e) {
+            console.log(e);
+            this.setState({ loading: true });
+        }
+    }
 
     render() {
         let body = null;
         let searchlist = null;
         var items = null;
-        if (this.state.list.length > 0) {
+        if (this.state.list.length === 0 && this.state.loading) {
+            items =
+                <div>
+                    <h1>Smell the Aroma! The oven is heating......</h1>
+                    <br />
+                    <img alt="Oven" height="150" width="150" src={ovenLoad} />
+                </div>
+        }
+        else if (this.state.list.length > 0) {
             items = this.state.list.map((item, key) =>
 
                 <div className="carddisplay">
@@ -64,7 +101,7 @@ class Result extends Component {
                                 <p>{item.desc}</p>
 
                             </figcaption>
-                        
+
                         </figure>
                     </a>
 
@@ -89,8 +126,7 @@ class Result extends Component {
                         className='clssearch-txt' value={this.state.query} onChange={this.handleQueryChange}
                         onKeyPress={(event) => {
                             if (event.key === 'Enter' || event.key === 'Return') {
-                                var link = document.getElementById('resulttest1');
-                                link.click();
+                                this.reloadResults()
                             }
                         }}
                     />
@@ -102,11 +138,13 @@ class Result extends Component {
                 </button>
                 </div>
                 <Link to={{
-                    pathname: "/results", query: {
+                    pathname: "/", query: {
                         query: this.state.query
                     }
                 }} style={{ hidden: true }} id="resulttest1">
                 </Link>
+                <h2> Search results for : {this.state.query}</h2>
+                <hr />
             </div >
 
         )
