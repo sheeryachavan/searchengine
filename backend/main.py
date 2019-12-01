@@ -8,9 +8,7 @@ from flask import Flask, request, jsonify
 from flask import json, g
 from flask_cors import CORS, cross_origin
 import numpy as np
-import spacy
 import requests
-import en_core_web_lg
 from pymongo import MongoClient
 import dns
 
@@ -71,7 +69,7 @@ result1 = [
         "link": "https://www.foodfood.com/recipedetails/chicken-farcha"
     }
 ]
-nlp = en_core_web_lg.load()
+
 import json
 
 

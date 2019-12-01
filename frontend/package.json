@@ -11,13 +11,16 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
   },
+  "homepage": "http://sheeryachavan.github.io/searchengine",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-  "proxy":"http://5fdfab2d.ngrok.io",
+  "proxy": "http://1690d65b.ngrok.io",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -32,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
