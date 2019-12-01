@@ -20,7 +20,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "http://1690d65b.ngrok.io",
+  "proxy": "https://safe-spire-04631.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },

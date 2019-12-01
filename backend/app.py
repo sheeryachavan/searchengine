@@ -155,4 +155,4 @@ def dataRetrieval(query):
     return ranked_results, final_result1
 
 
-app.run(debug=True)
+app.run(host='0.0.0.0',debug=True)
