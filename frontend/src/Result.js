@@ -78,9 +78,9 @@ class Result extends Component {
         if (this.state.list.length === 0 && this.state.loading) {
             items =
                 <div>
-                    <h1>Smell the Aroma! The oven is heating......</h1>
+                    <h1>Enjoy the Aroma! The chefs are working for you...</h1>
                     <br />
-                    <img alt="Oven" height="150" width="150" src={ovenLoad} />
+                    <img alt="Oven" height="500" width="500" src={ovenLoad} />
                 </div>
         }
         else if (this.state.list.length > 0) {
