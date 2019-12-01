@@ -1,0 +1,11 @@
+Flask==1.1.1
+Flask-Cors==3.0.8
+en-core-web-lg==2.2.0
+textblob==0.15.3
+spacy==2.2.0
+numpy==1.17.1
+numpydoc==0.9.1
+gunicorn==19.7.1
+requests==2.22.0
+pymongo==3.9.0
+dnspython==1.16.0
