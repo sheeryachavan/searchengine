@@ -89,14 +89,8 @@ def results_blank():
 
 @app.route("/")
 def index():
-    query = flask.request.args.get("query", None)
-    print("hi"+str(flask.request.args))
-    print(flask.request.args)
-    if query:
-        app.logger.info("Query {} received".format(query))
-        # results = retrieve(query)
-        return flask.redirect(flask.url_for('results'), code=200)
-    return flask.redirect(flask.url_for('/'), code=200)
+    
+    return flask.redirect("http://sheeryachavan.github.io/searchengine", code=200)
 
 
 def dataRetrieval(query):
@@ -155,4 +149,4 @@ def dataRetrieval(query):
     return ranked_results, final_result1
 
 
-app.run(host='0.0.0.0',port='5000',debug=True)
+app.run(host='127.0.0.1',port='5000',debug=True)
