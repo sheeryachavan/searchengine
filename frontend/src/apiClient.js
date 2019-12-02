@@ -11,7 +11,7 @@ class APIClient {
 
     getResults(query) {
         if (query)
-            return this.perform('post', '/results', query)
+            return this.perform('post', 'http://35.170.249.243/results', query)
         else {
             this.perform('get', '/');
         }
