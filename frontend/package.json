@@ -22,6 +22,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "homepage": "https://sheeryachavan.github.io/searchengine/",
   "proxy":"http://35.170.249.243",
   "browserslist": {
     "production": [
