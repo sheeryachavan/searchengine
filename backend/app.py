@@ -50,9 +50,9 @@ def dataRetrieval(query):
         ingredients_str = re.sub("and","",ingredients_str)
     if re.search(r"\bor\b",ingredients_str):
         ingredients_str = re.sub("or","",ingredients_str)
+    # if re.search(r"\,",ingredients_str):
+    #     ingredients_str = re.sub(",","",ingredients_str)
 
-    
-    # print(query)
     ingredients_str = ingredients_str.split()
     stop_words = set(["salt", "pepper"])
     
@@ -63,6 +63,7 @@ def dataRetrieval(query):
     db1 = client.foodfood
     inverted_index_ff = db1.invertedindex.find()[0]
     # ingredients = ["tomato","Carrot","cabbage"]
+    individual_ing_ff = []
     ranked_results_ff = {}
     final_result_ff = []
     # result = []
@@ -157,7 +158,7 @@ def dataRetrieval(query):
     print("========================================================")
     print(final_result_fffr)
     print("=======================================")
-    return ranked_results_fr, final_result_fffr
+    return ranked_results_fffr, final_result_fffr
     
 
 
