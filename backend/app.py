@@ -77,13 +77,12 @@ def dataRetrieval(query):
             if not final_result_ff:
                 final_result_ff.extend(set(ingred_combine_list_ff))
             else:
-                final_result_ff = list(set(final_result_ff) &
-                                       set(ingred_combine_list_ff))
-                print(final_result_ff)
-
-            ranked_results_ff["result"+str(count)] = final_result_ff
-
-    final_result1_ff = getFinalResult(db1.reviews,final_result_ff)
+                final_result_ff = list(set(final_result_ff) & set(ingred_combine_list_ff))
+            if len(final_result_ff) > 0: 
+                ranked_results_ff["result"+str(count)] = final_result_ff
+    print(sorted(ranked_results_ff.keys()))
+    finalff = ranked_results_ff[sorted(ranked_results_ff.keys())[-1]]
+    final_result1_ff = getFinalResult(db1.reviews,finalff)
 
     # for food republic
     # db2 = client.foodrepublic
@@ -94,7 +93,6 @@ def dataRetrieval(query):
     # result = []
 
     for (count, input_ingred) in enumerate(ingredients):
-        #     print(count)
         ingred_combine_list_fr = []
         word2 = Word(input_ingred.lower())
         word1 = word2.lemmatize()
@@ -110,11 +108,10 @@ def dataRetrieval(query):
             else:
                 final_result_fr = list(set(final_result_fr) &
                                        set(ingred_combine_list_fr))
-                print(final_result_fr)
-
-            ranked_results_fr["result"+str(count)] = final_result_fr
-
-    final_result1_fr = getFinalResult(db2.fr_recipes,final_result_fr)
+            if len(final_result_fr) > 0: 
+                ranked_results_fr["result"+str(count)] = final_result_fr
+    finalfr = ranked_results_fr[sorted(ranked_results_fr.keys())[-1]]
+    final_result1_fr = getFinalResult(db2.fr_recipes,finalfr)
     final_result_fffr = final_result1_ff + final_result1_fr
     ranked_results_fffr = {}
     rslt_comb_list = []
