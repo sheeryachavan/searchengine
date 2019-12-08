@@ -83,15 +83,7 @@ def dataRetrieval(query):
 
             ranked_results_ff["result"+str(count)] = final_result_ff
 
-    final_result1_ff = []
-    titlelist_ff = []
-    for recipe in final_result_ff:
-
-        rec = db1.reviews.find_one({"_id": recipe})
-        rec.pop("_id", None)
-        if rec["title"] not in titlelist_ff:
-            titlelist_ff.append(rec["title"])
-            final_result1_ff.append(rec)
+    final_result1_ff = getFinalResult(db1.reviews,final_result_ff)
 
     # for food republic
     # db2 = client.foodrepublic
@@ -122,16 +114,7 @@ def dataRetrieval(query):
 
             ranked_results_fr["result"+str(count)] = final_result_fr
 
-    final_result1_fr = []
-    titlelist_fr = []
-    for recipe in final_result_fr:
-
-        rec = db2.fr_recipes.find_one({"_id": recipe})
-        rec.pop("_id", None)
-        if rec["title"] not in titlelist_fr:
-            titlelist_fr.append(rec["title"])
-            final_result1_fr.append(rec)
-
+    final_result1_fr = getFinalResult(db2.fr_recipes,final_result_fr)
     final_result_fffr = final_result1_ff + final_result1_fr
     ranked_results_fffr = {}
     rslt_comb_list = []
@@ -149,5 +132,14 @@ def dataRetrieval(query):
     print(final_result_fffr)
     print("=======================================")
     return ranked_results_fffr, final_result_fffr
-
+def getFinalResult(db,finalresult):
+    final_result1 = []
+    titlelist = []
+    for recipe in finalresult:
+        rec = db.find_one({"_id": recipe})
+        rec.pop("_id", None)
+        if rec["title"] not in titlelist:
+            titlelist.append(rec["title"])
+            final_result1.append(rec)
+    return final_result1
 app.run(host='127.0.0.1', port='5000', debug=True)
