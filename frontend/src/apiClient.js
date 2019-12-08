@@ -1,5 +1,6 @@
 import axios from 'axios';
-const BASE_URI = 'http://35.170.249.243';
+// const BASE_URI = 'http://35.170.249.243';
+const BASE_URI = 'http://localhost:5000';
 const client = axios.create({
     baseURL: BASE_URI,
     json: true,

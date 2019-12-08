@@ -79,6 +79,8 @@ def dataRetrieval(query):
             ingred_combine_list_ff.extend(inverted_index_ff[singular_word_str])
         if plural_word_str in inverted_index_ff:
             ingred_combine_list_ff.extend(inverted_index_ff[plural_word_str])
+
+            
         if input_ingred.lower() in inverted_index_ff:
             if not final_result_ff:
                 final_result_ff.extend(set(ingred_combine_list_ff))
