@@ -1,7 +1,8 @@
 from __future__ import absolute_import, print_function
 import flask
 from textblob import Word
-app = flask.Flask("__main__", static_folder="../frontend/build/static",template_folder="../frontend/build")
+app = flask.Flask("__main__", static_folder="../frontend/build/static",
+                  template_folder="../frontend/build")
 from flask import Flask, request, jsonify
 from flask import json, g
 from flask_cors import CORS, cross_origin
@@ -14,7 +15,8 @@ import json
 
 
 # def MongoConnection():
-client = MongoClient("mongodb+srv://admin:admin@combining-hku7y.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient(
+    "mongodb+srv://admin:admin@combining-hku7y.mongodb.net/test?retryWrites=true&w=majority")
 db1 = client.foodfood
 inverted_index_ff = db1.invertedindex.find()[0]
 db2 = client.foodrepublic
@@ -33,17 +35,25 @@ def results():
         # print(flask.request.data.decode("utf-8"))
         allresult, mainresult = dataRetrieval(
             flask.request.get_data().decode("utf-8"))
-        # print(query)
+        if type(mainresult) == 'str':
+            mainresult = {
+                "error": mainresult
+            }
         return jsonify(mainresult)
     except:
+        mainresult = {
+            "error": "Sorry!, Too many chefs spoiled the recipe!"
+        }
         print("Results not found")
+        return jsonify(mainresult)
+        
 
 
 @app.route("/results", methods=["GET"])
 def results_blank():
     try:
         return flask.redirect(flask.url_for('/'), code=200)
-    except: 
+    except:
         print("Something went wrong!")
 
 
@@ -80,19 +90,22 @@ def dataRetrieval(query):
             singular_word_str = Word(word1).singularize()
             plural_word_str = Word(word1).pluralize()
             if singular_word_str in inverted_index_ff:
-                ingred_combine_list_ff.extend(inverted_index_ff[singular_word_str])
+                ingred_combine_list_ff.extend(
+                    inverted_index_ff[singular_word_str])
             if plural_word_str in inverted_index_ff:
-                ingred_combine_list_ff.extend(inverted_index_ff[plural_word_str])
+                ingred_combine_list_ff.extend(
+                    inverted_index_ff[plural_word_str])
             if input_ingred.lower() in inverted_index_ff:
                 if not final_result_ff:
                     final_result_ff.extend(set(ingred_combine_list_ff))
                 else:
-                    final_result_ff = list(set(final_result_ff) & set(ingred_combine_list_ff))
-                if len(final_result_ff) > 0: 
+                    final_result_ff = list(
+                        set(final_result_ff) & set(ingred_combine_list_ff))
+                if len(final_result_ff) > 0:
                     ranked_results_ff["result"+str(count)] = final_result_ff
         print(sorted(ranked_results_ff.keys()))
         finalff = ranked_results_ff[sorted(ranked_results_ff.keys())[-1]]
-        final_result1_ff = getFinalResult(db1.reviews,finalff)
+        final_result1_ff = getFinalResult(db1.reviews, finalff)
 
         # for food republic
         # db2 = client.foodrepublic
@@ -109,19 +122,21 @@ def dataRetrieval(query):
             singular_word_str = Word(word1).singularize()
             plural_word_str = Word(word1).pluralize()
             if singular_word_str in inverted_index_fr:
-                ingred_combine_list_fr.extend(inverted_index_fr[singular_word_str])
+                ingred_combine_list_fr.extend(
+                    inverted_index_fr[singular_word_str])
             if plural_word_str in inverted_index_fr:
-                ingred_combine_list_fr.extend(inverted_index_fr[plural_word_str])
+                ingred_combine_list_fr.extend(
+                    inverted_index_fr[plural_word_str])
             if input_ingred.lower() in inverted_index_fr:
                 if not final_result_fr:
                     final_result_fr.extend(set(ingred_combine_list_fr))
                 else:
                     final_result_fr = list(set(final_result_fr) &
-                                        set(ingred_combine_list_fr))
-                if len(final_result_fr) > 0: 
+                                           set(ingred_combine_list_fr))
+                if len(final_result_fr) > 0:
                     ranked_results_fr["result"+str(count)] = final_result_fr
         finalfr = ranked_results_fr[sorted(ranked_results_fr.keys())[-1]]
-        final_result1_fr = getFinalResult(db2.fr_recipes,finalfr)
+        final_result1_fr = getFinalResult(db2.fr_recipes, finalfr)
         final_result_fffr = final_result1_ff + final_result1_fr
         ranked_results_fffr = {}
         rslt_comb_list = []
@@ -141,8 +156,10 @@ def dataRetrieval(query):
         return ranked_results_fffr, final_result_fffr
     except:
         print("Oops! Recipes not retrieved")
+        return [], "Oops! Recipes not retrieved"
 
-def getFinalResult(db,finalresult):
+
+def getFinalResult(db, finalresult):
     try:
         final_result1 = []
         titlelist = []
@@ -155,5 +172,7 @@ def getFinalResult(db,finalresult):
         return final_result1
     except:
         print("Recipes not found!")
-        
+        return []
+
+
 app.run(host='127.0.0.1', port='5000', debug=True)

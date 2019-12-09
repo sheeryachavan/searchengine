@@ -9,7 +9,8 @@ class Result extends Component {
         this.state = {
             list: [],
             loading: false,
-            query: ""
+            query: "",
+            error: ""
         };
         this.handleQueryChange = this.handleQueryChange.bind(this);
     }
@@ -33,11 +34,17 @@ class Result extends Component {
             this.apiClient = new APIClient();
             if (this.props.location && this.props.location.query.query) {
                 this.setState({ loading: true })
-                this.apiClient.getResults(this.props.location.query.query).then((data) =>
-                    this.setState({ ...this.state, list: data, loading: false, query: this.props.location.query.query })
+                this.apiClient.getResults(this.props.location.query.query).then((data) => {
+                    if (data.error) {
+
+                        this.setState({ ...this.state, error: data.error, loading: false, query: this.props.location.query.query,error:"" })
+                    }
+                    else
+                        this.setState({ ...this.state, list: data, loading: false, query: this.props.location.query.query })
+                }
                 );
             }
-            else{
+            else {
                 var link = document.getElementById('resulttest1');
                 link.click();
             }
@@ -55,8 +62,12 @@ class Result extends Component {
             this.apiClient = new APIClient();
             if (this.state.query) {
                 this.setState({ loading: true })
-                this.apiClient.getResults(this.state.query).then((data) =>
-                    this.setState({ ...this.state, list: data, loading: false, query: this.state.query })
+                this.apiClient.getResults(this.state.query).then((data) => {
+                    if (data.error)
+                        this.setState({ ...this.state, error: data.error, loading: false, query: this.state.query })
+                    else
+                        this.setState({ ...this.state, list: data, loading: false, query: this.state.query ,error:""})
+                }
                 );
             }
             else {
@@ -83,11 +94,9 @@ class Result extends Component {
                     <img alt="Oven" height="500" width="500" src={ovenLoad} />
                 </div>
         }
-        else if (this.state.list.length > 0) {
+        else if (this.state.list.length > 0 && this.state.error === "") {
             items = this.state.list.map((item, key) =>
-
                 <div className="carddisplay">
-
                     <a href={item.link} target="_blank">
                         <figure style={{ backgroundImage: `linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ),url(${item.image})` }} className="figure">
                             <div class="date"><div>
@@ -112,6 +121,10 @@ class Result extends Component {
                     <div className="clsmainlink">www.foodfood.com</div>
                     <div className="clsdesc">{item.desc}</div> */}
                 </div>);
+        }
+        else if (this.state.error !== "") {
+            debugger;
+            items = <div><h1>{this.state.error}</h1></div>
         }
         else {
             items = <div><h1>Sorry! No Results Found</h1></div>
