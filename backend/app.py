@@ -74,6 +74,9 @@ def dataRetrieval(query):
             ingredients_str = re.sub("and", "", ingredients_str)
         if re.search(r"\bor\b", ingredients_str):
             ingredients_str = re.sub("or", "", ingredients_str)
+        if re.search(r",",ingredients_str):
+            ingredients_str = re.sub(","," ",ingredients_str)
+            
         ingredients_str = ingredients_str.split()
         stop_words = set(["salt", "pepper"])
 
