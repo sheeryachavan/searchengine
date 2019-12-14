@@ -14,7 +14,7 @@ import re
 import json
 
 
-# def MongoConnection():
+# Establish connection with MongoDB Atlas
 client = MongoClient(
     "mongodb+srv://admin:admin@combining-hku7y.mongodb.net/test?retryWrites=true&w=majority")
 db1 = client.foodfood
@@ -29,10 +29,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route("/results", methods=["POST"])
 def results():
     try:
-        print("hello")
-        print(flask.request.url)
-        print(flask.request.get_data().decode("utf-8"))
-        # print(flask.request.data.decode("utf-8"))
         allresult, mainresult = dataRetrieval(
             flask.request.get_data().decode("utf-8"))
         if type(mainresult) == 'str':
@@ -65,6 +61,15 @@ def index():
         print("Something went wrong!")
 
 
+
+# Retrieve recipes with the given input ingredients from the user
+# Ranked results:(Explained with the help of example below)
+# Suppose we have 3 ingredients as input.
+# ranked_results_fffr will have 3 keys result0,result1,result2
+# result0:recipes with ingredient1 in it
+# result1:recipes with ingredient1 and ingredient2 in it
+# result2:recipes with ingredient1,ingredient2 and ingredient3 in it
+# final_result_fffr : contains the recipes with all the ingredients mentioned in the input 
 def dataRetrieval(query):
     try:
         ingredients_str = query
@@ -78,7 +83,9 @@ def dataRetrieval(query):
         stop_words = set(["salt", "pepper"])
 
         ingredients = [w for w in ingredients_str if not w in stop_words]
-        print(ingredients)
+
+
+        # for foodfood
         individual_ing_ff = []
         ranked_results_ff = {}
         final_result_ff = []
@@ -108,9 +115,6 @@ def dataRetrieval(query):
         final_result1_ff = getFinalResult(db1.reviews, finalff)
 
         # for food republic
-        # db2 = client.foodrepublic
-        # inverted_index_fr = db2.invertedIndexfr.find()[0]
-        # ingredients = ["tomato","Carrot","cabbage"]
         ranked_results_fr = {}
         final_result_fr = []
         # result = []
@@ -142,7 +146,6 @@ def dataRetrieval(query):
         rslt_comb_list = []
 
         for result in ranked_results_ff:
-            print(result)
             if result in ranked_results_fr:
                 rslt_comb_list = ranked_results_ff[result] + \
                     ranked_results_fr[result]
@@ -152,13 +155,12 @@ def dataRetrieval(query):
         print(ranked_results_fffr)
         print("========================================================")
         print(final_result_fffr)
-        print("=======================================")
         return ranked_results_fffr, final_result_fffr
     except:
         print("Oops! Recipes not retrieved")
         return [], "Oops! Recipes not retrieved"
 
-
+# Retrieve recipes respective to the id's from MongoDB Atlas
 def getFinalResult(db, finalresult):
     try:
         final_result1 = []
