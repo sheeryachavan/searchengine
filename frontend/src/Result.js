@@ -35,11 +35,12 @@ class Result extends Component {
             if (this.props.location && this.props.location.query.query) {
                 this.setState({ loading: true })
                 this.apiClient.getResults(this.props.location.query.query).then((data) => {
-                    if (data.error) {
+                    if (data.error || typeof data === 'string') {
 
-                        this.setState({ ...this.state, error: data.error, loading: false, query: this.props.location.query.query,error:"" })
+                        this.setState({ ...this.state, error: data.error, loading: false, query: this.props.location.query.query, error: typeof data === 'string' ? data : data.error })
                     }
                     else
+
                         this.setState({ ...this.state, list: data, loading: false, query: this.props.location.query.query })
                 }
                 );
@@ -63,10 +64,10 @@ class Result extends Component {
             if (this.state.query) {
                 this.setState({ loading: true })
                 this.apiClient.getResults(this.state.query).then((data) => {
-                    if (data.error)
-                        this.setState({ ...this.state, error: data.error, loading: false, query: this.state.query })
+                    if (data.error || typeof data === 'string')
+                        this.setState({ ...this.state, error: data.error, loading: false, query: this.state.query, error: typeof data === 'string' ? data : data.error })
                     else
-                        this.setState({ ...this.state, list: data, loading: false, query: this.state.query ,error:""})
+                        this.setState({ ...this.state, list: data, loading: false, query: this.state.query, error: "" })
                 }
                 );
             }
