@@ -29,3 +29,13 @@ Terminal2:
 9. The backend of the app is now up on `http://localhost:<port>`
 
 ### Note: The crawler, scrapper and inverted-index scripts are provided in `backend directory
+
+
+# Project By:-
+- Ankur Morbale
+- Shivani Patole
+- Shreesh Chavan
+# Advisor:
+- Prof. Jordan Suchow
+- Abhishek Mishra (for hosting frontend on netlify.com)
+# ***********************************COMBIN - ING***********************************#
