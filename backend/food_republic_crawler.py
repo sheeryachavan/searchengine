@@ -19,7 +19,7 @@ import requests
 requests.adapters.DEFAULT_RETRIES = 1
 from textblob import TextBlob
 from textblob import Word
-from config import MongoConnection
+# from config import MongoConnection
 
 # In[18]:
 
@@ -56,7 +56,7 @@ def filter_ing(ing):
 
 
 def scrap_link(link):
-    client = MongoConnection()
+    client = MongoClient("mongodb+srv://admin:admin@combining-hku7y.mongodb.net/test?retryWrites=true&w=majority")
     db = client.foodrepublic
     req = requests.get(link)
     soup = BeautifulSoup(req.text, 'lxml')

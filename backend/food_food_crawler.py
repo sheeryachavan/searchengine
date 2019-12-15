@@ -6,11 +6,11 @@ import re
 
 from pymongo import MongoClient
 import dns
-from config import MongoConnection
+# from config import MongoConnection
 
 category = ["course", "cuisine", "occasion", "show"]
 
-client = MongoConnection()
+client = MongoClient("mongodb+srv://admin:admin@combining-hku7y.mongodb.net/test?retryWrites=true&w=majority")
 db = client.foodfood
 
 for i in range(len(category)):
