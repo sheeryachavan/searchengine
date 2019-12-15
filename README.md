@@ -28,3 +28,4 @@ Terminal2:
 8. Run "python3 app.py"
 9. The backend of the app is now up on `http://localhost:<port>`
 
+### Note: The crawler, scrapper and inverted-index scripts are provided in `backend directory
